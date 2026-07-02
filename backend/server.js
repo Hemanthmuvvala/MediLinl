@@ -11,7 +11,14 @@ const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://medilinl.vercel.app',
+    /\.vercel\.app$/,   // catch any Vercel preview URLs
+  ],
+  credentials: true,
+}));
 app.use(express.json());
 
 // Routes

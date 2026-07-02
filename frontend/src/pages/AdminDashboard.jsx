@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import API from '../api';
 
 const STATUS_MAP = {
   Pending: 'badge-pending',
@@ -28,7 +29,7 @@ export default function AdminDashboard() {
 
   const fetchAll = useCallback(() => {
     setLoading(true);
-    fetch('/api/admin/all')
+    fetch(`${API}/api/admin/all`)
       .then((r) => r.json())
       .then(setData)
       .finally(() => setLoading(false));
@@ -45,7 +46,7 @@ export default function AdminDashboard() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      const res = await fetch('/api/admin/doctors', {
+      const res = await fetch(`${API}/api/admin/doctors`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -71,7 +72,7 @@ export default function AdminDashboard() {
     if (!window.confirm('Remove this doctor from the system?')) return;
     setDeleting(id);
     try {
-      await fetch(`/api/admin/doctors/${id}`, { method: 'DELETE' });
+      await fetch(`${API}/api/admin/doctors/${id}`, { method: 'DELETE' });
       showMsg('success', '✅ Doctor removed.');
       fetchAll();
     } catch {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import API from '../api';
 
 export default function BookingPage() {
   const { doctorId } = useParams();
@@ -16,7 +17,7 @@ export default function BookingPage() {
   const [form, setForm] = useState({ date: '', time: '', notes: '' });
 
   useEffect(() => {
-    fetch(`/api/doctors/${doctorId}`)
+    fetch(`${API}/api/doctors/${doctorId}`)
       .then((r) => r.json())
       .then((data) => setDoctor(data))
       .finally(() => setLoading(false));
@@ -33,7 +34,7 @@ export default function BookingPage() {
     setSuccess('');
     setSubmitting(true);
     try {
-      const res = await fetch('/api/appointments', {
+      const res = await fetch(`${API}/api/appointments`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

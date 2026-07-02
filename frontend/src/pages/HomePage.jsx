@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../api';
 
 const SPECIALTIES = [
   'Cardiology', 'Dermatology', 'Neurology', 'Orthopedics',
@@ -23,7 +24,7 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('/api/doctors')
+    fetch(`${API}/api/doctors`)
       .then((r) => r.json())
       .then((data) => {
         setDoctors(data);

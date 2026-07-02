@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../api';
 
 const STATUS_MAP = {
   Pending: 'badge-pending',
@@ -17,7 +18,7 @@ export default function MyAppointments() {
 
   const fetchAppointments = useCallback(() => {
     setLoading(true);
-    fetch(`/api/appointments/patient/${user._id}`)
+    fetch(`${API}/api/appointments/patient/${user._id}`)
       .then((r) => r.json())
       .then(setAppointments)
       .finally(() => setLoading(false));
@@ -29,7 +30,7 @@ export default function MyAppointments() {
     if (!window.confirm('Cancel this appointment?')) return;
     setDeletingId(id);
     try {
-      const res = await fetch(`/api/appointments/${id}`, { method: 'DELETE' });
+      const res = await fetch(`${API}/api/appointments/${id}`, { method: 'DELETE' });
       if (res.ok) {
         setMsg({ type: 'success', text: '✅ Appointment cancelled.' });
         setAppointments((prev) => prev.filter((a) => a._id !== id));

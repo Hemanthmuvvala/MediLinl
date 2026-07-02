@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import API from '../api';
 
 const STATUS_MAP = {
   Pending: 'badge-pending',
@@ -16,7 +17,7 @@ export default function DoctorDashboard() {
 
   const fetchAppointments = useCallback(() => {
     setLoading(true);
-    fetch(`/api/appointments/doctor/${user._id}`)
+    fetch(`${API}/api/appointments/doctor/${user._id}`)
       .then((r) => r.json())
       .then(setAppointments)
       .finally(() => setLoading(false));
@@ -27,7 +28,7 @@ export default function DoctorDashboard() {
   const updateStatus = async (id, status) => {
     setUpdatingId(id);
     try {
-      const res = await fetch(`/api/appointments/${id}/status`, {
+      const res = await fetch(`${API}/api/appointments/${id}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status }),

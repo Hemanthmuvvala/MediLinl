@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../api';
 
 export default function RegisterPage() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function RegisterPage() {
     setSuccess('');
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/register', {
+      const res = await fetch(`${API}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),

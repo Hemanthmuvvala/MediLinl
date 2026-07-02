@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../api';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -17,8 +18,8 @@ export default function LoginPage() {
     try {
       const endpoint =
         role === 'doctor'
-          ? '/api/auth/doctor-login'
-          : '/api/auth/login';
+          ? `${API}/api/auth/doctor-login`
+          : `${API}/api/auth/login`;
 
       const res = await fetch(endpoint, {
         method: 'POST',
