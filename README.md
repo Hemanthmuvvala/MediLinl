@@ -1,7 +1,7 @@
 # Book a Doctor — MediLinl (MERN Web App)
 
 A full-stack MERN web application for booking doctor appointments online.  
-Live Demo: [medilinl.vercel.app](https://medilinl.vercel.app)
+Live Demo: [medilinl.vercel.app](https://medi-linl-git-main-23pa1a05g4-vishnueduis-projects.vercel.app/)
 
 ---
 
